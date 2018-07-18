@@ -4,7 +4,7 @@
   "description": "Server-sent events with pub/sub interface",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/tests.js",
+    "test": "mocha --exit -r ts-node/register test/*.ts ",
     "start": "node demo/server.js"
   },
   "repository": {
@@ -24,9 +24,24 @@
   },
   "homepage": "https://github.com/triblondon/node-sse-pubsub#readme",
   "devDependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/debug": "0.0.30",
+    "@types/express": "^4.16.0",
+    "@types/mocha": "^5.2.4",
+    "@types/node": "^10.5.2",
+    "@types/node-fetch": "^2.1.1",
     "chai": "^4.1.2",
-    "express": "^4.15.4",
-    "mocha": "^3.5.0",
-    "node-fetch": "^1.7.3"
+    "express": "^4.16.3",
+    "mocha": "^5.2.0",
+    "node-fetch": "^2.0.0",
+    "ts-node": "^7.0.0",
+    "tslint": "^5.10.0",
+    "tslint-config-prettier": "^1.13.0",
+    "tslint-config-standard": "^7.1.0",
+    "tslint-language-service": "^0.9.9",
+    "typescript": "^2.9.2"
+  },
+  "dependencies": {
+    "debug": "^3.1.0"
   }
 }

@@ -1,0 +1,15 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:latest",
+    "tslint-config-standard",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "interface-name": false,
+    "no-var-requires": true,
+    "max-classes-per-file": [false],
+    "object-literal-sort-keys": false,
+    "semicolon": [true, "always"]
+  }
+}

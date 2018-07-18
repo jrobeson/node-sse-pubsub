@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "plugins": [
+      { "name": "tslint-language-service"}
+    ],
+    "target": "es2016",
+    "module": "commonjs",
+    "declaration": true,
+    "lib": ["es2016", "es2017.object"],
+    "outDir": "dist",
+    "removeComments": false,
+    "sourceMap": true,
+    "strict": true,
+    "pretty": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["./types/*"]
+    },
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "files": [
+    "./index.ts",
+  ],
+  "include": [
+    "demos",
+  ],
+  "exclude": [
+    "dist",
+    "out"
+  ]
+}
