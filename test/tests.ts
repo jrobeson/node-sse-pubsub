@@ -129,7 +129,7 @@ describe('SSEChannel', function() {
     const elapsed = await measureTime(chunkPromise);
     const output = await chunkPromise;
     expect(elapsed).to.be.approximately(500, 30);
-    expect(output).to.match(/data:\s*\n\n/);
+    expect(output).to.match(/:ping\n\n/);
     expect(output).to.not.contain('event:');
     expect(output).to.not.contain('id:');
   });

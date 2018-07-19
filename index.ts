@@ -42,11 +42,15 @@ export class SseChannel {
     this.clients = new Set();
 
     if (this.options.pingInterval) {
-      this.pingTimer = setInterval(() => this.publish(), this.options.pingInterval);
+      this.pingTimer = setInterval(() => this.ping(), this.options.pingInterval);
     }
   }
 
-  public publish(data?: string | object, eventName?: string | null) {
+  public ping() {
+    this.clients.forEach(({ res }) => res.write(':ping\n\n'));
+  }
+
+  public publish(data: string | object, eventName?: string | null) {
     const thisId = this.nextId;
     if (typeof data === 'object') data = JSON.stringify(data);
     data = data
@@ -57,7 +61,7 @@ export class SseChannel {
       : '';
 
     const output =
-      (data ? `id: ${thisId}\n` : '') + (eventName ? `event: ${eventName}\n` : '') + (data || 'data: ') + '\n\n';
+      (data ? `id: ${thisId}\n` : '') + (eventName ? `event: ${eventName}\n` : '') + data + '\n\n';
     this.clients.forEach(({ res }) => res.write(output));
 
     this.messages.push(output);
