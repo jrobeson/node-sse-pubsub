@@ -52,16 +52,12 @@ export class SseChannel {
 
   public publish(data: string | object, eventName?: string | null) {
     const thisId = this.nextId;
-    if (typeof data === 'object') data = JSON.stringify(data);
-    data = data
-      ? data
-          .split(/[\r\n]+/)
-          .map(str => `data: ${str}`)
-          .join('\n')
-      : '';
+    let output = `id: ${thisId}\n`;
+    if (eventName) {
+      output += `event: ${eventName}\n`;
+    }
+    output += `${this.formatData(data)}\n\n`;
 
-    const output =
-      (data ? `id: ${thisId}\n` : '') + (eventName ? `event: ${eventName}\n` : '') + data + '\n\n';
     this.clients.forEach(({ res }) => res.write(output));
 
     this.messages.push(output);
@@ -132,5 +128,19 @@ export class SseChannel {
 
   public getSubscriberCount() {
     return this.clients.size;
+  }
+
+  private formatData(data: string | object) {
+    if (typeof data === 'object') {
+       return `data: ${JSON.stringify(data)}`;
+    } else {
+      // multiple input lines get transformed into lines prefixed with "data:"
+      return data
+        ? data
+            .split(/[\r\n]+/)
+            .map(str => `data: ${str}`)
+            .join('\n')
+        : '';
+    }
   }
 }
